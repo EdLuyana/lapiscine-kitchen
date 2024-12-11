@@ -17,9 +17,6 @@ class Recipe
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
-
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
@@ -29,8 +26,16 @@ class Recipe
     #[ORM\Column(type: Types::TEXT)]
     private ?string $instructions = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     private ?Category $category = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -45,18 +50,6 @@ class Recipe
     public function setTitle(string $title): static
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
-    {
-        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -97,6 +90,17 @@ class Recipe
         return $this;
     }
 
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
     public function getCategory(): ?Category
     {
         return $this->category;
@@ -108,4 +112,7 @@ class Recipe
 
         return $this;
     }
+
+
+
 }
