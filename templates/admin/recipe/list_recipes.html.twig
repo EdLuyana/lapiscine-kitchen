@@ -1,0 +1,28 @@
+
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+    <h1>Liste de toutes les recettes bof de la piscines</h1>
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Date de création</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for recipe in recipes %}
+            <tr>
+                <td>{{ recipe.id }}</td>
+                <td>{{ recipe.title }}</td>
+                <td>{{ recipe.createdAt | date('d-m-Y')}}</td>
+                <td><img src="{{ asset('assets/uploads/' ~ recipe.image) }}" /></td>
+                <td><a href="{{ path('admin_delete_recipe', {'id': recipe.id}) }}">Supprimer</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock body %}
