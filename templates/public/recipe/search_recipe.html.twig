@@ -1,0 +1,30 @@
+{% extends 'public/base.html.twig' %}
+
+
+{% block title %}
+    Recherche pour "{{ search }}" | Les recettes de la piscine
+{% endblock %}
+
+{% block body %}
+
+
+    <h1>Les résultats pour "{{ search }}"</h1>
+
+    <main>
+
+        {% if recipes | length == 0 %}
+            <p>Pas de résultat</p>
+        {% endif %}
+
+        {% for recipe in recipes %}
+
+            <article>
+                <p>{{ recipe.title }}</p>
+
+                <img width="100px" src="{{ asset('assets/uploads/' ~ recipe.image) }}" />
+                <a href="{{ path('show_recipe', {id: recipe.id}) }}">Voir la recette</a>
+            </article>
+        {% endfor %}
+    </main>
+
+{% endblock %}

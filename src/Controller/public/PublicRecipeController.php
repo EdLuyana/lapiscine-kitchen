@@ -4,6 +4,7 @@ namespace App\Controller\Public;
 
 use App\Repository\RecipeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,13 +20,12 @@ class PublicRecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/recipes/{id}', 'show_recipe', methods: ['GET'])]
+    #[Route('/recipes/{id}', 'show_recipe', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function showRecipe(int $id, RecipeRepository $recipeRepository)
     {
         $recipe = $recipeRepository->find($id);
 
-        if(!$recipe || !$recipe->isPublished())
-        {
+        if (!$recipe || !$recipe->isPublished()) {
             $notFoundResponse = new Response('La recette n existe pas veuillez rajouter du chlore', 404);
             return $notFoundResponse;
         }
@@ -34,4 +34,17 @@ class PublicRecipeController extends AbstractController
             'recipe' => $recipe
         ]);
     }
+
+    #[Route('recipes/search', 'search_recipes', methods: ['GET'])]
+    public function searchRecipes(Request $request, RecipeRepository $recipeRepository)
+    {
+        $search = $request->query->get('search');
+
+        $recipes = $recipeRepository->findBySearchInTitle($search);
+
+        return $this->render('public/recipe/search_recipe.html.twig', [
+            "recipes" => $recipes,
+            'search' => $search
+        ]);
     }
+}

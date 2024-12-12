@@ -1,0 +1,25 @@
+{%  extends "public/base.html.twig" %}
+
+
+{%  block title %}Accueil | Les Recettes de la piscine{% endblock %}
+
+{%  block body %}
+
+<main>
+
+    <form action="{{ path('login') }}" method="POST">
+
+        <label>Username
+        <input type="text" name="_username" value="{{ lastUsername }}" />
+        </label>
+
+        <label>Password
+        <input type="password" name="_password"/>
+        </label>
+
+        <input type="submit" value="Connection">
+
+    </form>
+
+</main>
+{% endblock %}

@@ -24,7 +24,7 @@ class AdminRecipeController extends AbstractController
 
         $adminRecipeForm->handleRequest($request);
 
-        if ($adminRecipeForm->isSubmitted()) {
+        if ($adminRecipeForm->isSubmitted() && $adminRecipeForm->isValid()) {
 
             $recipeImage = $adminRecipeForm->get('image')->getData();
 
@@ -33,7 +33,6 @@ class AdminRecipeController extends AbstractController
                 $imageNewName = uniqid() . '.' . $recipeImage->guessExtension();
 
                 $rootDir = $parameterBag->get('kernel.project_dir');
-
                 $uploadsDir = $rootDir . '/public/assets/uploads';
 
                 $recipeImage->move($uploadsDir, $imageNewName);
@@ -43,6 +42,7 @@ class AdminRecipeController extends AbstractController
 
             $entityManager->persist($recipe);
             $entityManager->flush();
+
             $this->addFlash('success', 'Enregistrement recette confirmé');
         }
 
@@ -81,11 +81,12 @@ class AdminRecipeController extends AbstractController
     public function updateRecipe(int $id, RecipeRepository $recipeRepository, EntityManagerInterface $entityManager, Request $request, ParameterBagInterface $parameterBag)
     {
         $recipe = $recipeRepository->find($id);
+
         $adminRecipeForm = $this->createForm(AdminRecipeType::class, $recipe);
 
         $adminRecipeForm->handleRequest($request);
 
-        if ($adminRecipeForm->isSubmitted()) {
+        if ($adminRecipeForm->isSubmitted() && $adminRecipeForm->isValid()) {
 
             $recipeImage = $adminRecipeForm->get('image')->getData();
 
