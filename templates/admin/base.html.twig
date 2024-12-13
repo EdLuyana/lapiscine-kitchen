@@ -13,6 +13,9 @@
     <section>
         <p style="background-color: green; color: white">{{ message }} ce CSS est validé par David Robert</p>
     </section>
+        <a href="{{ path('admin_list_users') }}">Utilisateurs</a>
+        <a href="{{ path('admin_logout') }}">Déconnexion</a>
+    </li>
 {% endfor %}
 {% block body %}{% endblock %}
 </body>

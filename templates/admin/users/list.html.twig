@@ -1,0 +1,29 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %} Utilisateurs {% endblock %}
+
+{% block body %}
+
+    <section>
+        <h1>Les utilisateurs</h1>
+
+        <div>
+            {% for user in users %}
+                <div>
+                    <div>
+                        <h5>{{ user.email }}</h5>
+                        <p>ID n°{{ user.id }}</p>
+                        <p>Roles : </p>
+                        <ul>
+                            {% for role in user.roles %}
+                                <li>{{ role }} </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </section>
+
+{% endblock %}

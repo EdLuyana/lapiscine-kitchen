@@ -1,0 +1,27 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block body %}
+
+<h2> Create User</h2>
+
+{{ form_start(userForm) }}
+
+<div>
+{{ form_label(userForm.email) }}
+{{ form_widget(userForm.email) }}
+{{ form_errors(userForm.email) }}
+</div>
+<div>
+    {{ form_label(userForm.password) }}
+    {{ form_widget(userForm.password) }}
+    {{ form_errors(userForm.password) }}
+</div>
+<div>
+    {{ form_label(userForm.roles) }}
+    {{ form_widget(userForm.roles) }}
+    {{ form_errors(userForm.roles) }}
+</div>
+<button type="submit">Créer</button>
+
+{{ form_end(userForm) }}
+{% endblock %}
