@@ -1,0 +1,12 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %} Modification {{ categoryToUpdate.title}} {% endblock %}
+
+{% block body %}
+    <section>
+        <h2>Modification {{categoryToUpdate.title}}</h2>
+        {{ form_start(formView) }}
+        {{ form_widget(formView) }}
+        {{ form_end(formView) }}
+    </section>
+{% endblock %}

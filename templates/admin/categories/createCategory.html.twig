@@ -1,0 +1,12 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %} Créer une nouvelle catégorie {% endblock %}
+
+{% block body %}
+    <section>
+        <h2>Ajout d'une nouvelle catégorie</h2>
+        {{ form_start(formView) }}
+        {{ form_widget(formView) }}
+        {{ form_end(formView) }}
+    </section>
+{% endblock %}

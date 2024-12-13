@@ -1,0 +1,26 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Liste des catégories {% endblock %}
+
+{% block body %}
+
+    <section>
+        <h1>Catégories</h1>
+        <div>
+            {% for category in categories %}
+                <div>
+                    <div>
+                        <h5>{{ category.title }}</h5>
+                        <a href="{{ path('admin_update_category', {id: category.id}) }}">Editer</a>
+                        <a href="{{ path('admin_delete_category', {id: category.id}) }}">Supprimer</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <a href="{{ path('admin_create_category') }}">Ajouter une catégorie</a>
+
+    </section>
+
+
+{% endblock %}

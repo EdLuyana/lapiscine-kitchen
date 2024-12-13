@@ -1,0 +1,29 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %} Liste des catégories {% endblock %}
+
+{% block body %}
+
+    <section>
+        <h1>Recettes</h1>
+        <div>
+            {% for category in categories %}
+                <div>
+                    <div>
+                        <h5>{{ category.title }}</h5>
+                        {% for recipe in category.recipes %}
+                            {% if recipe.isPublished %}
+                                <p><a href="{{ path('public_recipe_show', {id: recipe.id}) }}">{{ recipe.title }}</a></p>
+                            {% endif %}
+                        {% endfor %}
+                        <a href="{{ path('public_category_show', {id: category.id}) }}">Voir la catégorie</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+    </section>
+
+
+{% endblock %}

@@ -35,6 +35,7 @@ class UserType extends AbstractType
                 'label' => 'Password',
                 'label_attr' => ['class' => 'form-label'],
             ])
+            ->add('enregistrer', SubmitType::class, [])
         ;
     }
 

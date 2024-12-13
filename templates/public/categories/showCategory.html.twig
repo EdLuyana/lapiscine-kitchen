@@ -1,0 +1,31 @@
+{% extends 'public/base.html.twig' %}
+
+{% block title %}{{ category.title }} {% endblock %}
+
+{% block body %}
+
+    <section>
+        <h1>{{ category.title }}</h1>
+        <div>
+            <div>
+                <div>
+                    <h5>{{ category.title }}</h5>
+                    <p>Recettes liées à cette catégorie: </p>
+                    <ul>
+                        {% for recipe in category.recipes %}
+                            {% if recipe.isPublished %}
+                                <li><a href="{{ path('public_recipe_show', {id: recipe.id}) }}">{{ recipe.title }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <a href="{{ path('public_categories_list') }}">Retourner à la liste des catégories</a>
+
+    </section>
+
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %} Modification utilisateur {% endblock %}
+
+{% block body %}
+    <section>
+        <h2>Modification de l'utilisateur {{ userToUpdate.email }}</h2>
+        {{ form_start(userForm) }}
+        <div>
+            {{ form_label(userForm.email) }}
+            {{ form_widget(userForm.email) }}
+            {{ form_errors(userForm.email) }}
+        </div>
+        <div>
+            {{ form_label(userForm.roles) }}
+            {{ form_widget(userForm.roles) }}
+            {{ form_errors(userForm.roles) }}
+        </div>
+        <div>
+            {{ form_label(userForm.password) }}
+            {{ form_widget(userForm.password) }}
+            {{ form_errors(userForm.password) }}
+        </div>
+
+        <div>
+            {{ form_widget(userForm.enregistrer) }}
+        </div>
+        {{ form_end(formView) }}
+    </section>
+{% endblock %}
