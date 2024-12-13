@@ -29,7 +29,7 @@ class AdminUserController extends AbstractController
         return $this->render('admin/users/list.html.twig', ['users'=>$users]);
     }
 
-    #[Route('admin/create/user', name: 'admin_create_user')]
+    #[Route('admin/create/user', name: 'admin_create_user', methods: ['GET', 'POST'])]
     public function createUser(UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher, Request $request, EntityManagerInterface $entityManager) : Response
     {
         $user = new User();
@@ -46,7 +46,6 @@ class AdminUserController extends AbstractController
             );
             $user->setPassword($hashedPassword);
 
-            $user->setRoles(['ROLE_ADMIN']);
 
             $entityManager->persist($user);
             $entityManager->flush();
@@ -56,6 +55,19 @@ class AdminUserController extends AbstractController
         return $this->render('admin/users/create.html.twig', [
             'userForm' => $userForm->createView(),
         ]);
+
+    }
+    #[Route(path:'admin/users/delete/{id}', name:'admin_delete_user', requirements: ['id'=>'\d+'] ,methods: ['GET'])]
+    public function deleteUser(int $id, UserRepository $userRepository, EntityManagerInterface $entityManager) : Response
+    {
+        $userToDelete = $userRepository->find($id);
+
+        $entityManager->remove($userToDelete);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Utilisateur supprimé');
+
+        return $this->redirectToRoute('admin_list_users');
     }
 
 }

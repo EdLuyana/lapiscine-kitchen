@@ -19,6 +19,7 @@
                                 <li>{{ role }} </li>
                             {% endfor %}
                         </ul>
+                        <p><a href="{{ path('admin_delete_user', {id: user.id}) }}">Supprimer</a></p>
                     </div>
                 </div>
             {% endfor %}
