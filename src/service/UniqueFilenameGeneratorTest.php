@@ -12,7 +12,7 @@ class UniqueFilenameGeneratorTest extends TestCase
         $uniqueFileNameGenerator = new UniqueFilenameGenerator();
         $uniqueFilename = $uniqueFileNameGenerator->generateUniqueFilename('hello','jpeg');
 
-        $this->assertFileExists('jpeg', $uniqueFilename);
+        $this->assertStringContainsString('jpeg', $uniqueFilename);
 
     }
 
